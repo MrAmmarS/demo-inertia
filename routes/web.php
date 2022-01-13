@@ -20,10 +20,12 @@ Route::get('/', function () {
 });
 
 Route::get('/users', function () {
+
+    $users = User::select('id','name','email')->paginate(10);
+    info($users);
+
     return Inertia::render('Users', [
-        'users' => User::all()->map(fn($user) => [
-            'name' => $user->name
-        ])
+        'users' => $users
     ]);
 }); 
 
