@@ -2,9 +2,13 @@
 
   <Head title="Users" />
 
-  <h1 class="text-3xl font-semibold">
-    Users
-  </h1>
+  <div class="flex justify-between mb-6">
+    <h1 class="text-3xl font-semibold">
+      Users
+    </h1>
+
+    <input v-model="search" type="text" placeholder="Search" class="border border-gray-300 rounded-md shadow-sm  px-6  focus:ring-indigo-500 focus:border-indigo-500">
+  </div>
 
   <div class="flex flex-col mt-6">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -50,40 +54,30 @@
   </div>
 
   <Pagination :links="users.links" class="mt-6 flex justify-center" />
-
-
-
-  <!-- <div class="flex justify-center mt-4">
-    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-      <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-        <span class="sr-only">Previous</span>
-        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-        </svg>
-      </a>
-      <Component :is="link.url ? 'Link' : 'span'" v-for="link in users.links" :href="link.url" v-html="link.label" aria-current="page" class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium" />
-      <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-        <span class="sr-only">Next</span>
-        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-        </svg>
-      </a>
-    </nav>
-  </div> -->
-
-
-
-
-  <!-- <Link v-for="link in users.links" v-if="link.url" :href="link.url" v-html="link.label" />
-      <Link v-for="link in users.links" v-if="link.url" :href="link.url" v-html="link.label" aria-current="page" class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
-      </Link>
-  <ul>
-    <li v-for="user in users" :key="user.id" v-text="user.name">
-    </li>
-  </ul> -->
 </template>
 
-<script>
+
+<script setup>
+import Pagination from "../Shared/Pagination";
+import { ref, watch } from "vue";
+import { Inertia } from "@inertiajs/inertia";
+
+defineProps({ users: Object })
+
+let search = ref('');
+ 
+// composition API
+watch (search, value => {
+  console.log('changed' + value);
+  Inertia.get('/users' , { search: value }, { 
+    preserveState: true 
+    });
+});
+
+</script>
+
+
+<!-- <script> 
 import Pagination from "../Shared/Pagination";
 
 export default {
@@ -92,6 +86,10 @@ export default {
 
   props: {
     users: Object,
+  },
+
+  data: {
+    search: Obejct
   }
 };
-</script>
+</script> -->
