@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-use function Psy\info;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,10 +30,14 @@ Route::get('/users', function () {
             // $query->where('name','like', "%{$search}%"); //stringInterpolation
             $query->where('name','like', '%' .$search . '%');
         })
-        ->paginate(10);
+        ->paginate(10)
+        ->withQueryString();
+
+    $filters = Request::only([ 'search' ]);
     
     return Inertia::render('Users', [
-        'users' => $users
+        'users'     => $users,
+        'filters'   => $filters
     ]);
 });
 
@@ -46,6 +49,7 @@ Route::get('/users', function () {
 //             // $query->where('name','like', '%' .$search . '%');
 //         })
 //         ->paginate(10)
+//         ->withQueryString()
 //         ->through(fn($user) => [
 //             'id'    => $user->id,
 //             'name'  => $user->name,
