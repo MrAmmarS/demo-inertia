@@ -58,7 +58,7 @@
 
 
 <script setup>
-import Pagination from "../Shared/Pagination";
+import Pagination from "../../Shared/Pagination";
 import { ref, watch } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 

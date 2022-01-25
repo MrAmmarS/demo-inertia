@@ -35,11 +35,37 @@ Route::get('/users', function () {
 
     $filters = Request::only([ 'search' ]);
     
-    return Inertia::render('Users', [
+    return Inertia::render('Users/Index', [
         'users'     => $users,
         'filters'   => $filters
     ]);
 });
+
+Route::get('/users/create', function () {
+    return Inertia::render('Users/Create');
+});
+
+Route::post('/users', function () {
+    // validate request
+    $attributes  = Request::validate([
+        'name' => 'required',
+        'email' => ['required', 'email'],
+        'password' => 'required'
+    ]);
+    // create user
+    User::create($attributes); 
+    // redirect
+
+    return redirect('/users');
+});
+
+Route::get('/settings', function () {
+    return Inertia::render('Settings');
+});
+ 
+Route::post('/logout', function () {
+    dd('log out user');
+}); 
 
 // Route::get('/users', function () {
 //     return Inertia::render('Users', [
@@ -57,12 +83,3 @@ Route::get('/users', function () {
 //         ])
 //     ]);
 // }); 
-
-Route::get('/settings', function () {
-    return Inertia::render('Settings');
-});
-
-// post little bit secured
-Route::post('/logout', function () {
-    dd('log out user');
-}); 
