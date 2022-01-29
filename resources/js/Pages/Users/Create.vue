@@ -1,4 +1,5 @@
 <template>
+  <Layout>
   <Head title="Create User" />
 
   <div class="flex max-w-md mb-6 mx-auto">
@@ -36,14 +37,23 @@
       <Link href="/users" class="mr-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-black bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-grey-500">
         Cancel
       </Link>
-      <button type="submit" :disabled="form.processing " class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+      <button type="submit" :disabled="form.processing" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
         Submit
       </button>
     </div>
 
   </form>
+  </Layout>
 </template>
 
+
+<script>
+import Layout from '../../Shared/Layout';
+
+export default {
+  components:{ Layout },
+};
+</script>
 
 <script setup>
 import { useForm } from "@inertiajs/inertia-vue3"; 

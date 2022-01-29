@@ -1,4 +1,5 @@
 <template>
+  <Layout>
 
   <Head title="Users" />
 
@@ -60,8 +61,17 @@
   </div>
 
   <Pagination :links="users.links" class="mt-6 flex justify-center" />
+  </Layout>
 </template>
 
+
+<script>
+import Layout from '../../Shared/Layout';
+
+export default {
+  components:{ Layout },
+};
+</script>
 
 <script setup>
 import Pagination from "../../Shared/Pagination";
