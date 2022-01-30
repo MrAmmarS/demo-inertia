@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -31,7 +32,10 @@ Route::middleware('auth')->group(function() {
         
         return Inertia::render('Users/Index', [
             'users'     => $users,
-            'filters'   => $filters
+            'filters'   => $filters,
+            'can'       => [
+                'createUser' => Auth::user()->can('create', User::class)
+            ]
         ]);
     });
     
