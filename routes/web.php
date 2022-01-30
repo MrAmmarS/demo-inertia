@@ -34,14 +34,15 @@ Route::middleware('auth')->group(function() {
             'users'     => $users,
             'filters'   => $filters,
             'can'       => [
-                'createUser' => Auth::user()->can('create', User::class)
+                'createUser'    => Auth::user()->can('create', User::class),
+                'editUser'      => Auth::user()->can('edit', User::class),
             ]
         ]);
     });
     
     Route::get('/users/create', function () {
         return Inertia::render('Users/Create');
-    });
+    })->can('create', User::class);
     
     Route::post('/users', function () {
         // validate request
@@ -50,10 +51,11 @@ Route::middleware('auth')->group(function() {
             'email' => ['required', 'email'],
             'password' => 'required'
         ]);
+        
         // create user
         User::create($attributes); 
+        
         // redirect
-    
         return redirect('/users');
     });
     

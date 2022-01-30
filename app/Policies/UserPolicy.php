@@ -13,4 +13,9 @@ class UserPolicy
     {
         return $user->email == 'admin@example.com';
     }
+
+    public function edit(User $user)
+    {
+        return $user->email == 'admin@example.com';
+    }
 }
