@@ -47,15 +47,8 @@
 </template>
 
 
-<script>
-import Layout from '../../Shared/Layout';
-
-export default {
-  components:{ Layout },
-};
-</script>
-
 <script setup>
+import Layout from '../../Shared/Layout';
 import { useForm } from "@inertiajs/inertia-vue3"; 
 
   defineProps({

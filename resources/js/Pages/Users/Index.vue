@@ -65,15 +65,8 @@
 </template>
 
 
-<script>
-import Layout from '../../Shared/Layout';
-
-export default {
-  components:{ Layout },
-};
-</script>
-
 <script setup>
+import Layout from '../../Shared/Layout';
 import Pagination from "../../Shared/Pagination";
 import { ref, watch } from "vue";
 import { Inertia } from "@inertiajs/inertia";
